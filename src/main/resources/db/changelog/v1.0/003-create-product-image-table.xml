@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="create_product_image_table" author="youssef">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product_image"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="product_image">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_product_image"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_url" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="alt_text" type="VARCHAR(255)"/>
+            <column name="is_primary" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="display_order" type="INT"/>
+            <column name="product_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_image"
+                                 constraintName="FK_PRODUCT_IMAGE_ON_PRODUCT" referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <rollback>
+            <dropTable tableName="product_image"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="remove_image_url_from_product" author="youssef">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="product" columnName="image_url"/>
+        </preConditions>
+
+        <dropColumn tableName="product" columnName="image_url"/>
+
+        <rollback>
+            <addColumn tableName="product">
+                <column name="image_url" type="VARCHAR(500)"/>
+            </addColumn>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
