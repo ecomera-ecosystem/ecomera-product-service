@@ -16,7 +16,7 @@ jobs:
       packages: read
     uses: ecomera-ecosystem/.github/.github/workflows/docker.yml@main
     with:
-      image_name: "ammysf/ecomera-api-gateway"
+      image_name: "ammysf/ecomera-product-service"
       dockerfile: "./Dockerfile"
       context: "."
     secrets:
