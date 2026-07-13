@@ -2,13 +2,14 @@ spring:
   cloud:
     config:
       enabled: false
+    vault:
+      enabled: false
   liquibase:
     enabled: false
   data:
     redis:
       autoconfigure:
         enabled: false
-
 eureka:
   client:
     enabled: false
