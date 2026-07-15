@@ -7,6 +7,8 @@
 ![Redis](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-yellow?logo=open-source-initiative&logoColor=white)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ecomera-product-service&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ecomera-product-service)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=ecomera-product-service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ecomera-product-service)
 
 Product Catalog microservice for the Ecomera ecosystem.
 
