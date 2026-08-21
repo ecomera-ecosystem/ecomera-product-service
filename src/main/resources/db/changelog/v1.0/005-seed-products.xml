@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="seed_products" author="youssef">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="product"/>
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM product</sqlCheck>
+        </preConditions>
+
+        <!-- ==================== ELECTRONICS (category a1...0001) ==================== -->
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000001"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="MacBook Pro M3"/>
+            <column name="description" value="Latest Apple MacBook Pro with M3 chip. Features a stunning Liquid Retina XDR display, up to 22 hours of battery life, and blazing-fast performance."/>
+            <column name="price" valueNumeric="1999.99"/>
+            <column name="stock" valueNumeric="25"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000001"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000001"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="MacBook Pro M3 laptop"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000001"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000015"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="MacBook Pro M3"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000001"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000016"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="MacBook Pro M3"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000001"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000002"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="iPhone 15 Pro Max"/>
+            <column name="description" value="Apple iPhone 15 Pro Max with A17 Pro chip. Titanium design, 48MP camera system, and USB-C connectivity."/>
+            <column name="price" valueNumeric="1299.99"/>
+            <column name="stock" valueNumeric="50"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000001"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000002"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="iPhone 15 Pro Max"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000002"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000017"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="iPhone 15 Pro Max"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000002"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000018"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="iPhone 15 Pro Max"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000002"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000003"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Samsung Galaxy S24 Ultra"/>
+            <column name="description" value="Samsung Galaxy S24 Ultra with built-in AI. Titanium frame, 200MP camera, and S Pen included."/>
+            <column name="price" valueNumeric="1199.99"/>
+            <column name="stock" valueNumeric="40"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000001"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000003"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Samsung Galaxy S24 Ultra"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000003"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000019"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Samsung Galaxy S24 Ultra"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000003"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000020"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Samsung Galaxy S24 Ultra"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000003"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000004"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Sony WH-1000XM5 Headphones"/>
+            <column name="description" value="Industry-leading noise canceling headphones with exceptional sound quality, comfort, and 30-hour battery life."/>
+            <column name="price" valueNumeric="349.99"/>
+            <column name="stock" valueNumeric="60"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000001"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000004"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Sony WH-1000XM5 Headphones"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000004"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000021"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Sony WH-1000XM5 Headphones"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000004"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000022"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Sony WH-1000XM5 Headphones"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000004"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000005"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Dell XPS 13 Laptop"/>
+            <column name="description" value="Ultra-thin and lightweight Dell XPS 13 with 13.4-inch InfinityEdge display, Intel Core i7 processor, and 16GB RAM."/>
+            <column name="price" valueNumeric="999.99"/>
+            <column name="stock" valueNumeric="30"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000001"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000005"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Dell XPS 13 Laptop"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000005"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000023"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Dell XPS 13 Laptop"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000005"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000024"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Dell XPS 13 Laptop"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000005"/>
+        </insert>
+
+        <!-- ==================== CLOTHING (category a1...0002) ==================== -->
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000006"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Classic Leather Jacket"/>
+            <column name="description" value="Premium genuine leather jacket. Timeless design with modern fit, quilted lining for extra warmth."/>
+            <column name="price" valueNumeric="249.99"/>
+            <column name="stock" valueNumeric="20"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000002"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000006"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Classic Leather Jacket"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000006"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000025"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1520975954732-35dd22299614?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Classic Leather Jacket"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000006"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000026"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Classic Leather Jacket"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000006"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000007"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Floral Summer Dress"/>
+            <column name="description" value="Beautiful floral print summer dress. Lightweight fabric, flattering silhouette, perfect for warm days."/>
+            <column name="price" valueNumeric="79.99"/>
+            <column name="stock" valueNumeric="40"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000002"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000007"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Floral Summer Dress"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000007"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000027"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Floral Summer Dress"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000007"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000028"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Floral Summer Dress"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000007"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000008"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Slim Fit Chinos"/>
+            <column name="description" value="Comfortable slim fit chinos made from premium cotton blend. Versatile for casual and smart-casual looks."/>
+            <column name="price" valueNumeric="59.99"/>
+            <column name="stock" valueNumeric="75"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000002"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000008"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Slim Fit Chinos"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000008"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000029"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Slim Fit Chinos"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000008"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000030"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Slim Fit Chinos"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000008"/>
+        </insert>
+
+        <!-- ==================== JEWELRY & ACCESSORIES (category a1...0003) ==================== -->
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000009"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="18K Gold Diamond Ring"/>
+            <column name="description" value="Exquisite 18K gold ring with brilliant cut diamonds. Perfect for engagements and special occasions."/>
+            <column name="price" valueNumeric="2499.99"/>
+            <column name="stock" valueNumeric="10"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000003"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000009"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="18K Gold Diamond Ring"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000009"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000031"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="18K Gold Diamond Ring"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000009"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000032"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="18K Gold Diamond Ring"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000009"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000010"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Silver Pearl Necklace"/>
+            <column name="description" value="Elegant sterling silver necklace with natural freshwater pearls. Adjustable length, perfect for any occasion."/>
+            <column name="price" valueNumeric="189.99"/>
+            <column name="stock" valueNumeric="35"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000003"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000010"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1515562141589-67f0d931e5e0?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Silver Pearl Necklace"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000010"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000033"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Silver Pearl Necklace"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000010"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000034"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Silver Pearl Necklace"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000010"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000011"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Rose Gold Bracelet"/>
+            <column name="description" value="Delicate rose gold bracelet with minimalist design. Hypoallergenic, suitable for daily wear."/>
+            <column name="price" valueNumeric="129.99"/>
+            <column name="stock" valueNumeric="45"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000003"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000011"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Rose Gold Bracelet"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000011"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000035"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Rose Gold Bracelet"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000011"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000036"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Rose Gold Bracelet"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000011"/>
+        </insert>
+
+        <!-- ==================== TOYS & GAMES (category a1...0008) ==================== -->
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000012"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="LEGO Technic Porsche 911"/>
+            <column name="description" value="Detailed LEGO Technic building set of the iconic Porsche 911. Features working steering, suspension, and flat-six engine."/>
+            <column name="price" valueNumeric="179.99"/>
+            <column name="stock" valueNumeric="30"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000008"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000012"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1587654780291-39c9404d7dd0?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="LEGO Technic Porsche 911"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000012"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000037"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1513483460609-1c8a505ea990?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="LEGO Technic Porsche 911"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000012"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000038"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="LEGO Technic Porsche 911"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000012"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000013"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Wooden Board Game Set"/>
+            <column name="description" value="Premium wooden board game collection including chess, checkers, and backgammon. Handcrafted with a folding board."/>
+            <column name="price" valueNumeric="89.99"/>
+            <column name="stock" valueNumeric="50"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000008"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000013"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1632501641765-e568d28b0015?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Wooden Board Game Set"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000013"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000039"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Wooden Board Game Set"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000013"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000040"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Wooden Board Game Set"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000013"/>
+        </insert>
+
+        <insert tableName="product">
+            <column name="id" value="b1000000-0000-0000-0000-000000000014"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="title" value="Remote Control Racing Car"/>
+            <column name="description" value="High-speed remote control racing car with 4WD, rechargeable battery, and 2.4GHz remote control."/>
+            <column name="price" valueNumeric="49.99"/>
+            <column name="stock" valueNumeric="60"/>
+            <column name="category_id" value="a1000000-0000-0000-0000-000000000008"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000014"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Remote Control Racing Car"/>
+            <column name="is_primary" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000014"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000041"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1594787318286-3d835c1d207f?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Remote Control Racing Car"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="2"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000014"/>
+        </insert>
+
+        <insert tableName="product_image">
+            <column name="id" value="c1000000-0000-0000-0000-000000000042"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="alt_text" value="Remote Control Racing Car"/>
+            <column name="is_primary" valueBoolean="false"/>
+            <column name="display_order" valueNumeric="3"/>
+            <column name="product_id" value="b1000000-0000-0000-0000-000000000014"/>
+        </insert>
+
+        <rollback>
+            <sql>DELETE FROM product_image WHERE created_by = 'system'</sql>
+            <sql>DELETE FROM product WHERE created_by = 'system'</sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

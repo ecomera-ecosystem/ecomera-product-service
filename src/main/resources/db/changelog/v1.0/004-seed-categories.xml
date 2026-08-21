@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="seed_categories" author="youssef">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="category"/>
+        </preConditions>
+
+        <insert tableName="category">
+            <column name="id" value="a1000000-0000-0000-0000-000000000001"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="name" value="Electronics"/>
+            <column name="description" value="Smartphones, laptops, gadgets, and accessories"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="slug" value="electronics"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="1"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="a1000000-0000-0000-0000-000000000002"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="name" value="Clothing"/>
+            <column name="description" value="Men's and women's fashion, apparel, and accessories"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="slug" value="clothing"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="2"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="a1000000-0000-0000-0000-000000000003"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="name" value="Jewelry &amp; Accessories"/>
+            <column name="description" value="Rings, necklaces, watches, bags, and more"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1515562141589-67f0d931e5e0?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="slug" value="jewelry-accessories"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="3"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="a1000000-0000-0000-0000-000000000004"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="name" value="Home &amp; Living"/>
+            <column name="description" value="Furniture, decor, kitchen, and household essentials"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="slug" value="home-living"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="4"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="a1000000-0000-0000-0000-000000000005"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="name" value="Sports &amp; Outdoors"/>
+            <column name="description" value="Fitness gear, outdoor equipment, and sportswear"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1461896836934-bd45ba8d0f32?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="slug" value="sports-outdoors"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="5"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="a1000000-0000-0000-0000-000000000006"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="name" value="Beauty &amp; Personal Care"/>
+            <column name="description" value="Skincare, makeup, haircare, and grooming"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="slug" value="beauty"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="6"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="a1000000-0000-0000-0000-000000000007"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="name" value="Books &amp; Stationery"/>
+            <column name="description" value="Books, notebooks, pens, and office supplies"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="slug" value="books"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="7"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="id" value="a1000000-0000-0000-0000-000000000008"/>
+            <column name="created_at" valueComputed="NOW()"/>
+            <column name="updated_at" valueComputed="NOW()"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_by" value="system"/>
+            <column name="name" value="Toys &amp; Games"/>
+            <column name="description" value="Children's toys, board games, and puzzles"/>
+            <column name="image_url" value="https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=600&amp;h=400&amp;fit=crop"/>
+            <column name="slug" value="toys-games"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="display_order" valueNumeric="8"/>
+        </insert>
+
+        <rollback>
+            <sql>DELETE FROM category WHERE created_by = 'system'</sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
