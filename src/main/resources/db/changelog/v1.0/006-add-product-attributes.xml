@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="006-add-product-attributes" author="youssef">
+        <addColumn tableName="product">
+            <column name="color" type="VARCHAR(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="size" type="VARCHAR(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="rating" type="NUMERIC(3,1)" defaultValueNumeric="0.0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="product" columnName="color"/>
+            <dropColumn tableName="product" columnName="size"/>
+            <dropColumn tableName="product" columnName="rating"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="006-populate-product-attributes" author="youssef">
+        <!-- Electronics -->
+        <update tableName="product">
+            <column name="color" value="Space Gray"/>
+            <column name="rating" valueNumeric="4.8"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000001'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Natural Titanium"/>
+            <column name="rating" valueNumeric="4.9"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000002'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Titanium Gray"/>
+            <column name="rating" valueNumeric="4.7"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000003'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Black"/>
+            <column name="rating" valueNumeric="4.8"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000004'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Silver"/>
+            <column name="rating" valueNumeric="4.5"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000005'</where>
+        </update>
+        <!-- Men's Clothing -->
+        <update tableName="product">
+            <column name="color" value="Brown"/>
+            <column name="size" value="M"/>
+            <column name="rating" valueNumeric="4.6"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000006'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Beige"/>
+            <column name="size" value="32"/>
+            <column name="rating" valueNumeric="4.3"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000008'</where>
+        </update>
+        <!-- Women's Clothing -->
+        <update tableName="product">
+            <column name="color" value="Multicolor"/>
+            <column name="size" value="S"/>
+            <column name="rating" valueNumeric="4.4"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000007'</where>
+        </update>
+        <!-- Jewelry -->
+        <update tableName="product">
+            <column name="color" value="Gold"/>
+            <column name="rating" valueNumeric="4.9"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000009'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Silver"/>
+            <column name="rating" valueNumeric="4.7"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000010'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Rose Gold"/>
+            <column name="rating" valueNumeric="4.6"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000011'</where>
+        </update>
+        <!-- Toys -->
+        <update tableName="product">
+            <column name="color" value="Multicolor"/>
+            <column name="rating" valueNumeric="4.8"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000012'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Wood"/>
+            <column name="rating" valueNumeric="4.5"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000013'</where>
+        </update>
+        <update tableName="product">
+            <column name="color" value="Red"/>
+            <column name="rating" valueNumeric="4.2"/>
+            <where>id = 'b1000000-0000-0000-0000-000000000014'</where>
+        </update>
+        <rollback>
+            <update tableName="product">
+                <column name="color" valueComputed="NULL"/>
+                <column name="size" valueComputed="NULL"/>
+                <column name="rating" valueNumeric="0.0"/>
+                <where>created_by = 'system'</where>
+            </update>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

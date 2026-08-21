@@ -45,6 +45,20 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    @Size(max = 50, message = "Color must not exceed 50 characters")
+    @Column(name = "color", length = 50)
+    private String color;
+
+    @Size(max = 20, message = "Size must not exceed 20 characters")
+    @Column(name = "size", length = 20)
+    private String size;
+
+    @DecimalMin(value = "0.0", message = "Rating cannot be negative")
+    @Digits(integer = 2, fraction = 1, message = "Rating must be a valid decimal value")
+    @Column(name = "rating", precision = 3, scale = 1, nullable = false)
+    @Builder.Default
+    private BigDecimal rating = BigDecimal.ZERO;
+
     @Builder.Default
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> images = new ArrayList<>();
