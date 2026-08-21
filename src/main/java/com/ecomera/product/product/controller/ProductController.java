@@ -137,4 +137,25 @@ public class ProductController {
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(productService.getProductsByPriceBetweenRange(minPrice, maxPrice, pageable));
     }
+
+    @GetMapping("/filter")
+    @Operation(summary = "Filter products", description = "Combined faceted search: keyword, category, price range, color and size with sorting.")
+    @ApiResponse(responseCode = "200", description = "Products retrieved successfully")
+    @ApiResponse(responseCode = "400", description = "Invalid filter parameters")
+    public ResponseEntity<Page<ProductDto>> filter(
+            @Parameter(description = "Keyword (matches title, description, category name)", example = "laptop")
+            @RequestParam(required = false) String q,
+            @Parameter(description = "Category UUID") @RequestParam(required = false) UUID categoryId,
+            @Parameter(description = "Minimum price", example = "100.00") @RequestParam(required = false) BigDecimal minPrice,
+            @Parameter(description = "Maximum price", example = "2000.00") @RequestParam(required = false) BigDecimal maxPrice,
+            @Parameter(description = "Color filter", example = "black") @RequestParam(required = false) String color,
+            @Parameter(description = "Size filter", example = "M") @RequestParam(required = false) String size,
+            @Parameter(description = "Sort option", schema = @Schema(allowableValues = {"newest", "price_asc", "price_desc", "rating_desc"}))
+            @RequestParam(defaultValue = "newest") String sort,
+            @Parameter(description = "Page number (0-based)", example = "0") @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "Page size", example = "12") @RequestParam(defaultValue = "12") int pageSize) {
+
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return ResponseEntity.ok(productService.filterProducts(q, categoryId, minPrice, maxPrice, color, size, sort, pageable));
+    }
 }
