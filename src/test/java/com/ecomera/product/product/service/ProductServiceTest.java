@@ -6,16 +6,19 @@ import com.ecomera.product.shared.common.exception.BusinessException;
 import com.ecomera.product.shared.common.exception.ResourceNotFoundException;
 import com.ecomera.product.product.dto.ProductCreateDto;
 import com.ecomera.product.product.dto.ProductDto;
+import com.ecomera.product.product.dto.ProductFilterCriteria;
 import com.ecomera.product.product.dto.ProductUpdateDto;
 import com.ecomera.product.product.entity.Product;
 import com.ecomera.product.product.mapper.ProductMapper;
 import com.ecomera.product.product.repository.ProductRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Optional;
@@ -323,5 +326,111 @@ class ProductServiceTest {
                 .isInstanceOf(ResourceNotFoundException.class);
 
         verify(productRepository, never()).delete(any(Product.class));
+    }
+
+    private ProductDto sampleDto() {
+        return ProductDto.builder()
+                .id(product.getId())
+                .title(product.getTitle())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .stock(product.getStock())
+                .categoryId(category.getId())
+                .categoryName(category.getName())
+                .build();
+    }
+
+    @SuppressWarnings("unchecked")
+    private Page<ProductDto> filterAndCapturePageable(ProductFilterCriteria criteria, String sort) {
+        Pageable input = PageRequest.of(1, 12);
+        Page<Product> productPage = new PageImpl<>(products, input, products.size());
+        given(productRepository.findAll(any(Specification.class), any(Pageable.class))).willReturn(productPage);
+        given(productMapper.toDto(any(Product.class))).willReturn(sampleDto());
+
+        Page<ProductDto> actual = productService.filterProducts(criteria, sort, input);
+
+        ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
+        verify(productRepository).findAll(any(Specification.class), pageableCaptor.capture());
+        assertThat(pageableCaptor.getValue().getPageNumber()).isEqualTo(1);
+        assertThat(pageableCaptor.getValue().getPageSize()).isEqualTo(12);
+        return actual;
+    }
+
+    @Test
+    void shouldFilterProductsWithDefaultSortApplied() {
+        ProductFilterCriteria criteria = new ProductFilterCriteria(null, null, null, null, null, null);
+
+        Page<ProductDto> actual = filterAndCapturePageable(criteria, null);
+
+        assertThat(actual.getContent()).hasSize(2);
+        ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
+        verify(productRepository).findAll(any(Specification.class), pageableCaptor.capture());
+        Sort.Order order = pageableCaptor.getValue().getSort().getOrderFor("createdAt");
+        assertThat(order).isNotNull();
+        assertThat(order.getDirection()).isEqualTo(Sort.Direction.DESC);
+    }
+
+    @Test
+    void shouldMapPriceAscSort() {
+        filterAndCapturePageable(new ProductFilterCriteria(null, null, null, null, null, null), "price_asc");
+
+        ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
+        verify(productRepository).findAll(any(Specification.class), pageableCaptor.capture());
+        assertThat(pageableCaptor.getValue().getSort().getOrderFor("price"))
+                .isEqualTo(Sort.Order.asc("price"));
+    }
+
+    @Test
+    void shouldMapPriceDescSortCaseInsensitive() {
+        filterAndCapturePageable(new ProductFilterCriteria(null, null, null, null, null, null), "PRICE_DESC");
+
+        ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
+        verify(productRepository).findAll(any(Specification.class), pageableCaptor.capture());
+        assertThat(pageableCaptor.getValue().getSort().getOrderFor("price"))
+                .isEqualTo(Sort.Order.desc("price"));
+    }
+
+    @Test
+    void shouldMapRatingDescSort() {
+        filterAndCapturePageable(new ProductFilterCriteria(null, null, null, null, null, null), "rating_desc");
+
+        ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
+        verify(productRepository).findAll(any(Specification.class), pageableCaptor.capture());
+        assertThat(pageableCaptor.getValue().getSort().getOrderFor("rating"))
+                .isEqualTo(Sort.Order.desc("rating"));
+    }
+
+    @Test
+    void shouldMapNewestSortExplicitly() {
+        filterAndCapturePageable(new ProductFilterCriteria(null, null, null, null, null, null), "newest");
+
+        ArgumentCaptor<Pageable> pageableCaptor = ArgumentCaptor.forClass(Pageable.class);
+        verify(productRepository).findAll(any(Specification.class), pageableCaptor.capture());
+        assertThat(pageableCaptor.getValue().getSort().getOrderFor("createdAt"))
+                .isEqualTo(Sort.Order.desc("createdAt"));
+    }
+
+    @Test
+    void shouldThrowWhenSortOptionIsInvalid() {
+        ProductFilterCriteria criteria = new ProductFilterCriteria(null, null, null, null, null, null);
+
+        assertThatThrownBy(() -> productService.filterProducts(criteria, "cheapest", PageRequest.of(0, 10)))
+                .isInstanceOf(BusinessException.class)
+                .hasMessageContaining("Invalid sort option");
+    }
+
+    @Test
+    void shouldThrowWhenMinPriceGreaterThanMaxPriceOnFilter() {
+        ProductFilterCriteria criteria = new ProductFilterCriteria(
+                null, null,
+                java.math.BigDecimal.valueOf(500),
+                java.math.BigDecimal.valueOf(100),
+                null, null);
+
+        assertThatThrownBy(() -> productService.filterProducts(criteria, null, PageRequest.of(0, 10)))
+                .isInstanceOf(BusinessException.class)
+                .hasMessageContaining("Min price cannot be greater than max price");
+
+        verify(productRepository, never()).findAll(any(Specification.class), any(Pageable.class));
     }
 }
