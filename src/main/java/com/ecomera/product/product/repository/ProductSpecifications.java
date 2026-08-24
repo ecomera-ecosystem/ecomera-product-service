@@ -1,5 +1,6 @@
 package com.ecomera.product.product.repository;
 
+import com.ecomera.product.product.dto.ProductFilterCriteria;
 import com.ecomera.product.product.entity.Product;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,15 +15,16 @@ public final class ProductSpecifications {
     private ProductSpecifications() {
     }
 
-    public static Specification<Product> withFilters(
-            String keyword,
-            UUID categoryId,
-            BigDecimal minPrice,
-            BigDecimal maxPrice,
-            String color,
-            String size) {
+    public static Specification<Product> withFilters(ProductFilterCriteria criteria) {
 
         return (root, query, cb) -> {
+            String keyword = criteria.keyword();
+            UUID categoryId = criteria.categoryId();
+            BigDecimal minPrice = criteria.minPrice();
+            BigDecimal maxPrice = criteria.maxPrice();
+            String color = criteria.color();
+            String size = criteria.size();
+
             List<Predicate> predicates = new ArrayList<>();
 
             if (keyword != null && !keyword.trim().isEmpty()) {

@@ -7,6 +7,7 @@ import com.ecomera.product.shared.common.exception.BusinessException;
 import com.ecomera.product.shared.common.exception.ResourceNotFoundException;
 import com.ecomera.product.product.dto.ProductCreateDto;
 import com.ecomera.product.product.dto.ProductDto;
+import com.ecomera.product.product.dto.ProductFilterCriteria;
 import com.ecomera.product.product.dto.ProductImageCreateDto;
 import com.ecomera.product.product.dto.ProductImageUpdateDto;
 import com.ecomera.product.product.dto.ProductUpdateDto;
@@ -212,24 +213,16 @@ public class ProductService {
         return productRepository.findByPriceBetween(minPrice, maxPrice, pageable).map(productMapper::toDto);
     }
 
-    public Page<ProductDto> filterProducts(
-            String keyword,
-            UUID categoryId,
-            BigDecimal minPrice,
-            BigDecimal maxPrice,
-            String color,
-            String size,
-            String sort,
-            Pageable pageable) {
-        if (minPrice != null && maxPrice != null && minPrice.compareTo(maxPrice) > 0) {
+    public Page<ProductDto> filterProducts(ProductFilterCriteria criteria, String sort, Pageable pageable) {
+        if (criteria.minPrice() != null && criteria.maxPrice() != null
+                && criteria.minPrice().compareTo(criteria.maxPrice()) > 0) {
             throw new BusinessException("Min price cannot be greater than max price");
         }
         Sort mappedSort = mapSort(sort);
-        Pageable effectivePageable = mappedSort == null
-                ? pageable
-                : PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), mappedSort);
+        Pageable effectivePageable =
+                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), mappedSort);
         return productRepository
-                .findAll(ProductSpecifications.withFilters(keyword, categoryId, minPrice, maxPrice, color, size), effectivePageable)
+                .findAll(ProductSpecifications.withFilters(criteria), effectivePageable)
                 .map(productMapper::toDto);
     }
 

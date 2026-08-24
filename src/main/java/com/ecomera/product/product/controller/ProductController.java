@@ -2,6 +2,7 @@ package com.ecomera.product.product.controller;
 
 import com.ecomera.product.product.dto.ProductCreateDto;
 import com.ecomera.product.product.dto.ProductDto;
+import com.ecomera.product.product.dto.ProductFilterCriteria;
 import com.ecomera.product.product.dto.ProductUpdateDto;
 import com.ecomera.product.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -156,6 +157,8 @@ public class ProductController {
             @Parameter(description = "Page size", example = "12") @RequestParam(defaultValue = "12") int pageSize) {
 
         Pageable pageable = PageRequest.of(page, pageSize);
-        return ResponseEntity.ok(productService.filterProducts(q, categoryId, minPrice, maxPrice, color, size, sort, pageable));
+        ProductFilterCriteria criteria =
+                new ProductFilterCriteria(q, categoryId, minPrice, maxPrice, color, size);
+        return ResponseEntity.ok(productService.filterProducts(criteria, sort, pageable));
     }
 }
