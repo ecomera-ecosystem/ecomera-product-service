@@ -54,6 +54,7 @@
         <sonar.projectKey>ecomera-product-service</sonar.projectKey>
         <sonar.java.source>17</sonar.java.source>
         <sonar.java.target>17</sonar.java.target>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
     <dependencies>
         <!-- ============================================ -->

@@ -18,6 +18,9 @@ public record ProductDto(
         @Schema(description = "Product images") List<ProductImageDto> images,
         @Schema(description = "Category ID") UUID categoryId,
         @Schema(description = "Category name") String categoryName,
+        @Schema(description = "Product color") String color,
+        @Schema(description = "Product size") String size,
+        @Schema(description = "Average rating (0-5)") BigDecimal rating,
         @Schema(description = "Creation timestamp") LocalDateTime createdAt,
         @Schema(description = "Last update timestamp") LocalDateTime updatedAt
 ) {

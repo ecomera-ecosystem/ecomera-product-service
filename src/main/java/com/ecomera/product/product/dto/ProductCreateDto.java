@@ -34,6 +34,19 @@ public record ProductCreateDto(
 
         @NotNull(message = "Category is required")
         @Schema(description = "Category ID of the product", example = "a1b2c3d4-e5f6-7890-abcd-ef1234567890")
-        UUID categoryId
+        UUID categoryId,
+
+        @Size(max = 50, message = "Color must not exceed 50 characters")
+        @Schema(description = "Product color", example = "Black")
+        String color,
+
+        @Size(max = 20, message = "Size must not exceed 20 characters")
+        @Schema(description = "Product size", example = "M")
+        String size,
+
+        @PositiveOrZero(message = "Rating cannot be negative")
+        @Digits(integer = 2, fraction = 1, message = "Rating must be a valid decimal value")
+        @Schema(description = "Average rating (0-5)", example = "4.5")
+        BigDecimal rating
 ) {
 }

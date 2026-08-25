@@ -2,6 +2,7 @@ package com.ecomera.product.product.repository;
 
 import com.ecomera.product.category.entity.Category;
 import com.ecomera.product.category.repository.CategoryRepository;
+import com.ecomera.product.product.dto.ProductFilterCriteria;
 import com.ecomera.product.product.entity.Product;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,6 +70,7 @@ class ProductRepositoryTest {
                 .description("Apple laptop with M3 chip")
                 .price(new BigDecimal("1999.99"))
                 .stock(50)
+                .color("Silver")
                 .category(electronicsCategory)
                 .build();
 
@@ -76,6 +79,7 @@ class ProductRepositoryTest {
                 .description("Apple smartphone")
                 .price(new BigDecimal("999.99"))
                 .stock(100)
+                .color("Black")
                 .category(electronicsCategory)
                 .build();
 
@@ -84,6 +88,8 @@ class ProductRepositoryTest {
                 .description("Basic cotton t-shirt")
                 .price(new BigDecimal("29.99"))
                 .stock(500)
+                .color("White")
+                .size("M")
                 .category(clothingCategory)
                 .build();
 
@@ -149,5 +155,91 @@ class ProductRepositoryTest {
         Page<Product> results = productRepository.findAll(pageable);
         assertThat(results).hasSize(2);
         assertThat(results.getTotalElements()).isEqualTo(3);
+    }
+
+    private ProductFilterCriteria criteria(
+            String keyword, UUID categoryId, BigDecimal minPrice, BigDecimal maxPrice, String color, String size) {
+        return new ProductFilterCriteria(keyword, categoryId, minPrice, maxPrice, color, size);
+    }
+
+    @Test
+    void shouldReturnAllProductsWhenNoFiltersApplied() {
+        Page<Product> results = productRepository.findAll(
+                ProductSpecifications.withFilters(criteria(null, null, null, null, null, null)),
+                PageRequest.of(0, 10));
+        assertThat(results.getTotalElements()).isEqualTo(3);
+    }
+
+    @Test
+    void shouldFilterByKeywordInTitle() {
+        Page<Product> results = productRepository.findAll(
+                ProductSpecifications.withFilters(criteria("MacBook", null, null, null, null, null)),
+                PageRequest.of(0, 10));
+        assertThat(results).hasSize(1);
+        assertThat(results.getContent().get(0).getTitle()).isEqualTo("MacBook Pro M3");
+    }
+
+    @Test
+    void shouldFilterByKeywordInCategoryName() {
+        Page<Product> results = productRepository.findAll(
+                ProductSpecifications.withFilters(criteria("clothing", null, null, null, null, null)),
+                PageRequest.of(0, 10));
+        assertThat(results).hasSize(1);
+        assertThat(results.getContent().get(0).getTitle()).isEqualTo("Cotton T-Shirt");
+    }
+
+    @Test
+    void shouldFilterByCategoryId() {
+        Page<Product> results = productRepository.findAll(
+                ProductSpecifications.withFilters(criteria(null, clothingCategory.getId(), null, null, null, null)),
+                PageRequest.of(0, 10));
+        assertThat(results).hasSize(1);
+        assertThat(results.getContent().get(0).getTitle()).isEqualTo("Cotton T-Shirt");
+    }
+
+    @Test
+    void shouldFilterByInclusivePriceRange() {
+        Page<Product> results = productRepository.findAll(
+                ProductSpecifications.withFilters(criteria(null, null, new BigDecimal("999.99"), new BigDecimal("999.99"), null, null)),
+                PageRequest.of(0, 10));
+        assertThat(results).hasSize(1);
+        assertThat(results.getContent().get(0).getTitle()).isEqualTo("iPhone 15 Pro");
+    }
+
+    @Test
+    void shouldFilterByColorCaseInsensitive() {
+        Page<Product> results = productRepository.findAll(
+                ProductSpecifications.withFilters(criteria(null, null, null, null, "BLACK", null)),
+                PageRequest.of(0, 10));
+        assertThat(results).hasSize(1);
+        assertThat(results.getContent().get(0).getTitle()).isEqualTo("iPhone 15 Pro");
+    }
+
+    @Test
+    void shouldFilterBySizeCaseInsensitive() {
+        Page<Product> results = productRepository.findAll(
+                ProductSpecifications.withFilters(criteria(null, null, null, null, null, "m")),
+                PageRequest.of(0, 10));
+        assertThat(results).hasSize(1);
+        assertThat(results.getContent().get(0).getTitle()).isEqualTo("Cotton T-Shirt");
+    }
+
+    @Test
+    void shouldCombineMultipleFilters() {
+        Page<Product> results = productRepository.findAll(ProductSpecifications.withFilters(criteria(
+                        null, electronicsCategory.getId(),
+                        new BigDecimal("500"), new BigDecimal("2500"),
+                        "silver", null)),
+                PageRequest.of(0, 10));
+        assertThat(results).hasSize(1);
+        assertThat(results.getContent().get(0).getTitle()).isEqualTo("MacBook Pro M3");
+    }
+
+    @Test
+    void shouldReturnEmptyPageWhenNoProductMatchesCombinedFilters() {
+        Page<Product> results = productRepository.findAll(ProductSpecifications.withFilters(criteria(
+                        null, electronicsCategory.getId(), null, null, "white", null)),
+                PageRequest.of(0, 10));
+        assertThat(results).isEmpty();
     }
 }

@@ -9,4 +9,7 @@
     <include file="/db/changelog/v1.0/001-create-category-table.xml"/>
     <include file="/db/changelog/v1.0/002-create-product-table.xml"/>
     <include file="/db/changelog/v1.0/003-create-product-image-table.xml"/>
+    <include file="/db/changelog/v1.0/004-seed-categories.xml"/>
+    <include file="/db/changelog/v1.0/005-seed-products.xml"/>
+    <include file="/db/changelog/v1.0/006-add-product-attributes.xml"/>
 </databaseChangeLog>

@@ -2,10 +2,12 @@ package com.ecomera.product.product.service;
 
 import com.ecomera.product.category.entity.Category;
 import com.ecomera.product.category.repository.CategoryRepository;
+import com.ecomera.product.product.repository.ProductSpecifications;
 import com.ecomera.product.shared.common.exception.BusinessException;
 import com.ecomera.product.shared.common.exception.ResourceNotFoundException;
 import com.ecomera.product.product.dto.ProductCreateDto;
 import com.ecomera.product.product.dto.ProductDto;
+import com.ecomera.product.product.dto.ProductFilterCriteria;
 import com.ecomera.product.product.dto.ProductImageCreateDto;
 import com.ecomera.product.product.dto.ProductImageUpdateDto;
 import com.ecomera.product.product.dto.ProductUpdateDto;
@@ -209,5 +211,32 @@ public class ProductService {
             throw new BusinessException("Min price cannot be greater than max price");
         }
         return productRepository.findByPriceBetween(minPrice, maxPrice, pageable).map(productMapper::toDto);
+    }
+
+    public Page<ProductDto> filterProducts(ProductFilterCriteria criteria, String sort, Pageable pageable) {
+        if (criteria.minPrice() != null && criteria.maxPrice() != null
+                && criteria.minPrice().compareTo(criteria.maxPrice()) > 0) {
+            throw new BusinessException("Min price cannot be greater than max price");
+        }
+        Sort mappedSort = mapSort(sort);
+        Pageable effectivePageable =
+                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), mappedSort);
+        return productRepository
+                .findAll(ProductSpecifications.withFilters(criteria), effectivePageable)
+                .map(productMapper::toDto);
+    }
+
+    private Sort mapSort(String sort) {
+        if (sort == null || sort.isBlank()) {
+            return Sort.by(Sort.Direction.DESC, "createdAt");
+        }
+        return switch (sort.toLowerCase()) {
+            case "price_asc" -> Sort.by(Sort.Direction.ASC, "price");
+            case "price_desc" -> Sort.by(Sort.Direction.DESC, "price");
+            case "rating_desc" -> Sort.by(Sort.Direction.DESC, "rating");
+            case "newest" -> Sort.by(Sort.Direction.DESC, "createdAt");
+            default -> throw new BusinessException(
+                    "Invalid sort option: " + sort + ". Allowed values: newest, price_asc, price_desc, rating_desc");
+        };
     }
 }

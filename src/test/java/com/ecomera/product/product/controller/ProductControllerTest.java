@@ -2,12 +2,14 @@ package com.ecomera.product.product.controller;
 
 import com.ecomera.product.product.dto.ProductCreateDto;
 import com.ecomera.product.product.dto.ProductDto;
+import com.ecomera.product.product.dto.ProductFilterCriteria;
 import com.ecomera.product.product.dto.ProductUpdateDto;
 import com.ecomera.product.product.service.ProductService;
 import com.ecomera.product.shared.common.exception.BusinessException;
 import com.ecomera.product.shared.common.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -22,6 +24,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -268,6 +271,34 @@ class ProductControllerTest {
         mockMvc.perform(get("/api/v1/products/price")
                         .param("minPrice", "2000")
                         .param("maxPrice", "100"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void shouldFilterProducts() throws Exception {
+        given(productService.filterProducts(any(ProductFilterCriteria.class), anyString(), any(Pageable.class)))
+                .willReturn(new PageImpl<>(List.of(sampleDto), PageRequest.of(0, 12), 1));
+
+        mockMvc.perform(get("/api/v1/products/filter")
+                        .param("q", "laptop")
+                        .param("minPrice", "100.00")
+                        .param("sort", "price_asc"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].id").value(productId.toString()));
+
+        ArgumentCaptor<ProductFilterCriteria> criteriaCaptor = ArgumentCaptor.forClass(ProductFilterCriteria.class);
+        verify(productService).filterProducts(criteriaCaptor.capture(), eq("price_asc"), any(Pageable.class));
+        assertThat(criteriaCaptor.getValue().keyword()).isEqualTo("laptop");
+        assertThat(criteriaCaptor.getValue().minPrice()).isEqualByComparingTo("100.00");
+    }
+
+    @Test
+    void shouldReturnBadRequestWhenFilterSortInvalid() throws Exception {
+        given(productService.filterProducts(any(ProductFilterCriteria.class), anyString(), any(Pageable.class)))
+                .willThrow(new BusinessException("Invalid sort option: bogus"));
+
+        mockMvc.perform(get("/api/v1/products/filter")
+                        .param("sort", "bogus"))
                 .andExpect(status().isBadRequest());
     }
 }
