@@ -40,6 +40,11 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private Integer stock;
 
+    @NotBlank(message = "SKU is required")
+    @Size(max = 64, message = "SKU must not exceed 64 characters")
+    @Column(nullable = false, unique = true, length = 64)
+    private String sku;
+
     @NotNull(message = "Category is required")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)

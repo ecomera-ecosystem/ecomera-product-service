@@ -54,6 +54,7 @@ class ProductControllerTest {
         categoryId = UUID.randomUUID();
 
         validCreateDto = ProductCreateDto.builder()
+                .sku("SKU-9201")
                 .title("MacBook Pro")
                 .description("Powerful laptop")
                 .price(new BigDecimal("1999.99"))
@@ -63,6 +64,7 @@ class ProductControllerTest {
 
         sampleDto = ProductDto.builder()
                 .id(productId)
+                .sku("SKU-9201")
                 .title("MacBook Pro")
                 .description("Powerful laptop")
                 .price(new BigDecimal("1999.99"))

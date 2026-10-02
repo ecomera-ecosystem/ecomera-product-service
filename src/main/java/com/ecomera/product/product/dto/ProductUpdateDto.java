@@ -31,6 +31,10 @@ public record ProductUpdateDto(
         @Schema(description = "Updated stock quantity", example = "30")
         Integer stock,
 
+        @Size(min = 1, max = 64, message = "SKU must be between 1 and 64 characters")
+        @Schema(description = "Updated Stock Keeping Unit (SKU)", example = "MBP-M3-2024-UPDATED")
+        String sku,
+
         @Schema(description = "Updated Category ID of the product", example = "a1b2c3d4-e5f6-7890-abcd-ef1234567890")
         UUID categoryId,
 

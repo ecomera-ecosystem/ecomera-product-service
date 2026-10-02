@@ -32,6 +32,10 @@ public record ProductCreateDto(
         @Schema(description = "Available stock quantity", example = "50")
         Integer stock,
 
+        @NotBlank(message = "SKU is required and cannot be blank")
+        @Schema(description = "Stock Keeping Unit (SKU) of the product", example = "MBP-M3-2024")
+        String sku,
+
         @NotNull(message = "Category is required")
         @Schema(description = "Category ID of the product", example = "a1b2c3d4-e5f6-7890-abcd-ef1234567890")
         UUID categoryId,

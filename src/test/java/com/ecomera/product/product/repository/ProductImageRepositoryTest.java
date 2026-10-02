@@ -59,6 +59,7 @@ class ProductImageRepositoryTest {
         categoryRepository.save(category);
 
         product = Product.builder()
+                .sku("SKU-9101")
                 .title("Test Product")
                 .description("Test Description")
                 .price(new BigDecimal("99.99"))

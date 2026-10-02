@@ -66,6 +66,7 @@ class ProductRepositoryTest {
         categoryRepository.saveAll(List.of(electronicsCategory, clothingCategory));
 
         Product laptop = Product.builder()
+                .sku("SKU-9001")
                 .title("MacBook Pro M3")
                 .description("Apple laptop with M3 chip")
                 .price(new BigDecimal("1999.99"))
@@ -75,6 +76,7 @@ class ProductRepositoryTest {
                 .build();
 
         Product phone = Product.builder()
+                .sku("SKU-9002")
                 .title("iPhone 15 Pro")
                 .description("Apple smartphone")
                 .price(new BigDecimal("999.99"))
@@ -84,6 +86,7 @@ class ProductRepositoryTest {
                 .build();
 
         Product tshirt = Product.builder()
+                .sku("SKU-9003")
                 .title("Cotton T-Shirt")
                 .description("Basic cotton t-shirt")
                 .price(new BigDecimal("29.99"))
