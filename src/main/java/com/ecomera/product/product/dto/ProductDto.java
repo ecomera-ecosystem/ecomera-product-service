@@ -15,6 +15,7 @@ public record ProductDto(
         @Schema(description = "Detailed description") String description,
         @Schema(description = "Price in USD") BigDecimal price,
         @Schema(description = "Available stock") Integer stock,
+        @Schema(description = "Stock Keeping Unit (SKU)") String sku,
         @Schema(description = "Product images") List<ProductImageDto> images,
         @Schema(description = "Category ID") UUID categoryId,
         @Schema(description = "Category name") String categoryName,
