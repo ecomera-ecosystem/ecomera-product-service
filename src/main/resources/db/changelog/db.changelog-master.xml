@@ -13,4 +13,5 @@
     <include file="/db/changelog/v1.0/005-seed-products.xml"/>
     <include file="/db/changelog/v1.0/006-add-product-attributes.xml"/>
     <include file="/db/changelog/v1.1/007-add-product-sku.xml"/>
+    <include file="/db/changelog/v1.1/008-create-batch-metadata.xml"/>
 </databaseChangeLog>
