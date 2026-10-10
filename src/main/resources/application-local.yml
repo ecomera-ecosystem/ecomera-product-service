@@ -1,0 +1,22 @@
+spring:
+  config:
+    import: ''  # Disable config server import for local dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecomera_product
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  liquibase:
+    enabled: true
+  batch:
+    jdbc:
+      initialize-schema: never
+    job:
+      enabled: false
+
+server:
+  port: 8080

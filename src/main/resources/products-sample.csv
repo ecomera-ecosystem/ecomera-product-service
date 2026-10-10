@@ -1,19 +1,19 @@
-sku,title,description,price,stock,category_id,color,size
-SKU-0015,Anker USB-C Hub 7-in-1,7 port USB-C hub with HDMI and ethernet,24.99,40,a1000000-0000-0000-0000-000000000001,Black,
-SKU-0016,Logitech MX Master 3S,Quiet wireless mouse with USB-C charging,99.99,60,a1000000-0000-0000-0000-000000000001,Graphite,
-SKU-0017,Apple AirPods Pro 2,Active noise cancelling wireless earbuds,249.99,75,a1000000-0000-0000-0000-000000000001,White,
-SKU-0020,Nike Air Zoom Runner,Lightweight daily running shoe,139.99,70,a1000000-0000-0000-0000-000000000005,Red,10
-SKU-0021,Adidas Ultraboost Light,Responsive foam running shoe,179.99,45,a1000000-0000-0000-0000-000000000005,White,9
-SKU-0022,Cotton Crew Sweatshirt,Heavyweight cotton sweatshirt,39.99,110,a1000000-0000-0000-0000-000000000002,Grey,M
-SKU-0023,Levis 501 Jeans,Classic straight fit denim jeans,79.99,65,a1000000-0000-0000-0000-000000000002,Blue,32
-SKU-0024,Stainless Steel Water Bottle,Double wall insulated bottle 750ml,24.50,200,a1000000-0000-0000-0000-000000000005,Silver,750ml
-SKU-0025,Yoga Mat Pro,Non slip 6mm yoga mat,34.99,85,a1000000-0000-0000-0000-000000000005,Purple,
-SKU-0026,Ceramic Coffee Mug Set,Set of 4 glazed ceramic mugs,29.99,95,a1000000-0000-0000-0000-000000000004,White,
-SKU-0027,Scented Soy Candle Trio,Three unscented soy wax candles,18.99,150,a1000000-0000-0000-0000-000000000004,Ivory,
-SKU-0028,Vitamin C Serum,10 percent vitamin C facial serum,22.99,130,a1000000-0000-0000-0000-000000000006,Yellow,
-SKU-0029,Matte Lipstick Ruby,Long lasting matte lipstick,18.50,175,a1000000-0000-0000-0000-000000000006,Ruby Red,
-SKU-0030,Hardcover Design Patterns,Printed hardcover architecture book,45.00,55,a1000000-0000-0000-0000-000000000007,Navy,
-SKU-0031,Bullet Journal Dot Grid,Hardcover dotted notebook,12.99,210,a1000000-0000-0000-0000-000000000007,Black,
-SKU-0032,Titanium Ring Set,Set of 2 brushed titanium rings,349.99,22,a1000000-0000-0000-0000-000000000003,Silver,10
-SKU-0033,Kids Building Blocks 500pc,500 piece creative building blocks,59.99,80,a1000000-0000-0000-0000-000000000008,Multicolor,
-SKU-0034,Board Game Catan,Trade and negotiate to build the largest settlements,44.99,42,a1000000-0000-0000-0000-000000000008,,
+sku,title,description,price,stock,category_id,color,size,image_url
+SKU-0015,Anker USB-C Hub 7-in-1,7 port USB-C hub with HDMI and ethernet,24.99,40,a1000000-0000-0000-0000-000000000001,Black,,https://images.unsplash.com/photo-1625842268584-8f3296236761?w=600&h=400&fit=crop
+SKU-0016,Logitech MX Master 3S,Quiet wireless mouse with USB-C charging,99.99,60,a1000000-0000-0000-0000-000000000001,Graphite,,https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&h=400&fit=crop
+SKU-0017,Apple AirPods Pro 2,Active noise cancelling wireless earbuds,249.99,75,a1000000-0000-0000-0000-000000000001,White,,https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=600&h=400&fit=crop
+SKU-0020,Nike Air Zoom Runner,Lightweight daily running shoe,139.99,70,a1000000-0000-0000-0000-000000000005,Red,10,https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=400&fit=crop
+SKU-0021,Adidas Ultraboost Light,Responsive foam running shoe,179.99,45,a1000000-0000-0000-0000-000000000005,White,9,https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&h=400&fit=crop
+SKU-0022,Cotton Crew Sweatshirt,Heavyweight cotton sweatshirt,39.99,110,a1000000-0000-0000-0000-000000000002,Grey,M,https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=400&fit=crop
+SKU-0023,Levis 501 Jeans,Classic straight fit denim jeans,79.99,65,a1000000-0000-0000-0000-000000000002,Blue,32,https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&h=400&fit=crop
+SKU-0024,Stainless Steel Water Bottle,Double wall insulated bottle 750ml,24.50,200,a1000000-0000-0000-0000-000000000005,Silver,750ml,https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&h=400&fit=crop
+SKU-0025,Yoga Mat Pro,Non slip 6mm yoga mat,34.99,85,a1000000-0000-0000-0000-000000000005,Purple,,https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=600&h=400&fit=crop
+SKU-0026,Ceramic Coffee Mug Set,Set of 4 glazed ceramic mugs,29.99,95,a1000000-0000-0000-0000-000000000004,White,,https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?w=600&h=400&fit=crop
+SKU-0027,Scented Soy Candle Trio,Three unscented soy wax candles,18.99,150,a1000000-0000-0000-0000-000000000004,Ivory,,https://images.unsplash.com/photo-1602649352515-6d1c3e7f5c1d?w=600&h=400&fit=crop
+SKU-0028,Vitamin C Serum,10 percent vitamin C facial serum,22.99,130,a1000000-0000-0000-0000-000000000006,Yellow,,https://images.unsplash.com/photo-1620916566398-1963d314e8c8?w=600&h=400&fit=crop
+SKU-0029,Matte Lipstick Ruby,Long lasting matte lipstick,18.50,175,a1000000-0000-0000-0000-000000000006,Ruby Red,,https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=400&fit=crop
+SKU-0030,Hardcover Design Patterns,Printed hardcover architecture book,45.00,55,a1000000-0000-0000-0000-000000000007,Navy,,https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=400&fit=crop
+SKU-0031,Bullet Journal Dot Grid,Hardcover dotted notebook,12.99,210,a1000000-0000-0000-0000-000000000007,Black,,https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=600&h=400&fit=crop
+SKU-0032,Titanium Ring Set,Set of 2 brushed titanium rings,349.99,22,a1000000-0000-0000-0000-000000000003,Silver,10,https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=400&fit=crop
+SKU-0033,Kids Building Blocks 500pc,500 piece creative building blocks,59.99,80,a1000000-0000-0000-0000-000000000008,Multicolor,,https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=600&h=400&fit=crop
+SKU-0034,Board Game Catan,Trade and negotiate to build the largest settlements,44.99,42,a1000000-0000-0000-0000-000000000008,,https://images.unsplash.com/photo-1610890716171-6b1bb98ffd03?w=600&h=400&fit=crop
