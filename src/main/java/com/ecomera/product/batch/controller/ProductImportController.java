@@ -9,11 +9,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -66,7 +64,7 @@ public class ProductImportController {
     @GetMapping
     @Operation(summary = "List my imports", description = "Get paginated list of imports")
     @ApiResponse(responseCode = "200", description = "Imports retrieved")
-    public ResponseEntity<org.springframework.data.domain.Page<ProductImportResponse>> getMyImports(
+    public ResponseEntity<Page<ProductImportResponse>> getMyImports(
             @Parameter(description = "Page number (0-based)") @RequestParam(defaultValue = "0") int page,
             @Parameter(description = "Page size") @RequestParam(defaultValue = "20") int size) {
         
@@ -78,7 +76,7 @@ public class ProductImportController {
     @ApiResponse(responseCode = "200", description = "Error CSV downloaded")
     @ApiResponse(responseCode = "404", description = "Import not found")
     @ApiResponse(responseCode = "403", description = "Forbidden - Admin access required")
-    public ResponseEntity<org.springframework.core.io.Resource> downloadErrors(@PathVariable UUID importId) throws IOException {
+    public ResponseEntity<Resource> downloadErrors(@PathVariable UUID importId) throws IOException {
         String csv = "line_number,sku,title,description,price,stock,category_id,color,size,error_message\n";
         ByteArrayInputStream bis = new ByteArrayInputStream(csv.getBytes());
         InputStreamResource resource = new InputStreamResource(bis);
