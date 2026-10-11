@@ -23,24 +23,24 @@ public class ProductImportWriter implements ItemWriter<ProductImportItem> {
     @Override
     public void write(Chunk<? extends ProductImportItem> chunk) {
         for (ProductImportItem item : chunk.getItems()) {
-            Product product = productRepository.findBySku(item.sku())
-                    .orElseGet(() -> Product.builder().sku(item.sku()).build());
+            Product product = productRepository.findBySku(item.getSku())
+                    .orElseGet(() -> Product.builder().sku(item.getSku()).build());
 
-            product.setTitle(item.title());
-            product.setDescription(item.description());
-            product.setPrice(new BigDecimal(item.price()));
-            product.setStock(Integer.parseInt(item.stock()));
+            product.setTitle(item.getTitle());
+            product.setDescription(item.getDescription());
+            product.setPrice(new BigDecimal(item.getPrice()));
+            product.setStock(item.getStock());
 
-            UUID categoryId = UUID.fromString(item.categoryId());
+            UUID categoryId = item.getCategoryId();
             product.setCategory(categoryRepository.getReferenceById(categoryId));
 
-            product.setColor(item.color().isBlank() ? null : item.color());
-            product.setSize(item.size().isBlank() ? null : item.size());
+            product.setColor(item.getColor().isBlank() ? null : item.getColor());
+            product.setSize(item.getSize().isBlank() ? null : item.getSize());
 
-            if (item.imageUrl() != null && !item.imageUrl().isBlank() && product.getImages().isEmpty()) {
+            if (item.getImageUrl() != null && !item.getImageUrl().isBlank() && product.getImages().isEmpty()) {
                 product.getImages().add(ProductImage.builder()
-                        .imageUrl(item.imageUrl())
-                        .altText(item.title())
+                        .imageUrl(item.getImageUrl())
+                        .altText(item.getTitle())
                         .isPrimary(true)
                         .displayOrder(1)
                         .build());
