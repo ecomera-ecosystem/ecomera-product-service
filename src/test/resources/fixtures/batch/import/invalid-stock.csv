@@ -1,0 +1,4 @@
+sku,title,description,price,stock,category_id,color,size,image_url
+SKU-BAD-004,Bad Stock 1,Negative stock test,29.99,-5,a1000000-0000-0000-0000-000000000001,Red,M
+SKU-BAD-005,Bad Stock 2,Non-numeric stock test,49.99,not-a-number,a1000000-0000-0000-0000-000000000002,Blue,L
+SKU-BAD-006,Bad Stock 3,Empty stock test,19.99,,a1000000-0000-0000-0000-000000000001,Green,M

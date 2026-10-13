@@ -1,0 +1,5 @@
+sku,title,description,price,stock,category_id,color,size,image_url
+SKU-0001,MacBook Pro M3 Updated,Updated MacBook Pro M3,1899.99,18,a1000000-0000-0000-0000-000000000001,Space Gray,
+SKU-0004,Sony WH-1000XM5 Updated,Updated Sony headphones,319.99,55,a1000000-0000-0000-0000-000000000001,Silver,
+SKU-TEST-006,New Product 6,New product for update test,79.99,30,a1000000-0000-0000-0000-000000000002,Green,M
+SKU-TEST-007,New Product 7,Another new product,89.99,40,a1000000-0000-0000-0000-000000000003,Red,L
