@@ -1,0 +1,3 @@
+sku,title,description,price,stock,category_id,color,size,image_url
+SKU-BAD-007,Bad Category 1,Unknown category test,29.99,10,ffffffff-ffff-ffff-ffff-ffffffffffff,Red,M
+SKU-BAD-008,Bad Category 2,Another unknown category,49.99,20,00000000-0000-0000-0000-000000000000,Blue,L

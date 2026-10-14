@@ -1,0 +1,6 @@
+sku,title,description,price,stock,category_id,color,size,image_url
+SKU-TEST-001,Test Product 1,First test product,29.99,100,a1000000-0000-0000-0000-000000000001,Red,M,https://example.com/img1.jpg
+SKU-TEST-002,Test Product 2,Second test product,49.99,50,a1000000-0000-0000-0000-000000000002,Blue,L,https://example.com/img2.jpg
+SKU-TEST-003,Test Product 3,Third test product,19.99,75,a1000000-0000-0000-0000-000000000001,Green,,https://example.com/img3.jpg
+SKU-TEST-004,Test Product 4,Fourth test product,99.99,25,a1000000-0000-0000-0000-000000000003,Black,M,https://example.com/img4.jpg
+SKU-TEST-005,Test Product 5,Fifth test product,149.99,10,a1000000-0000-0000-0000-000000000002,White,XL,https://example.com/img5.jpg

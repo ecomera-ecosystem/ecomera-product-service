@@ -1,0 +1,5 @@
+sku,title,description,price,stock,category_id,color,size,image_url
+SKU-DUP-001,Duplicate SKU 1,First occurrence,29.99,10,a1000000-0000-0000-0000-000000000001,Red,M
+SKU-DUP-001,Duplicate SKU 1,Second occurrence,39.99,20,a1000000-0000-0000-0000-000000000002,Blue,L
+SKU-DUP-002,Another Duplicate,First,49.99,15,a1000000-0000-0000-0000-000000000001,Red,M
+SKU-DUP-002,Another Duplicate,Second,59.99,25,a1000000-0000-0000-0000-000000000002,Blue,L

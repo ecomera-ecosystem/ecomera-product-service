@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-5.0.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="008-create-batch-metadata" author="youssef">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="BATCH_JOB_INSTANCE"/>
+            </not>
+        </preConditions>
+
+        <comment>
+            Spring Batch metadata tables. Boot does not create these for PostgreSQL because
+            spring.batch.jdbc.initialize-schema defaults to "embedded", so Liquibase owns them.
+            Persistence is what lets a failed import be identified and restarted.
+        </comment>
+
+        <createTable tableName="BATCH_JOB_INSTANCE">
+            <column name="JOB_INSTANCE_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_BATCH_JOB_INSTANCE"/>
+            </column>
+            <column name="VERSION" type="BIGINT"/>
+            <column name="JOB_NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JOB_KEY" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint tableName="BATCH_JOB_INSTANCE"
+                             columnNames="JOB_NAME,JOB_KEY"
+                             constraintName="JOB_INST_UN"/>
+
+        <createTable tableName="BATCH_JOB_EXECUTION">
+            <column name="JOB_EXECUTION_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_BATCH_JOB_EXECUTION"/>
+            </column>
+            <column name="VERSION" type="BIGINT"/>
+            <column name="JOB_INSTANCE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_TIME" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_TIME" type="TIMESTAMP"/>
+            <column name="END_TIME" type="TIMESTAMP"/>
+            <column name="STATUS" type="VARCHAR(10)"/>
+            <column name="EXIT_CODE" type="VARCHAR(2500)"/>
+            <column name="EXIT_MESSAGE" type="VARCHAR(2500)"/>
+            <column name="LAST_UPDATED" type="TIMESTAMP"/>
+            <column name="JOB_CONFIGURATION_LOCATION" type="VARCHAR(2500)"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="JOB_INSTANCE_ID" baseTableName="BATCH_JOB_EXECUTION"
+                                 constraintName="FK_BATCH_JOB_EXECUTION_INSTANCE" referencedColumnNames="JOB_INSTANCE_ID"
+                                 referencedTableName="BATCH_JOB_INSTANCE"/>
+
+        <createTable tableName="BATCH_STEP_EXECUTION">
+            <column name="STEP_EXECUTION_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="PK_BATCH_STEP_EXECUTION"/>
+            </column>
+            <column name="VERSION" type="BIGINT"/>
+            <column name="STEP_NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JOB_EXECUTION_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_TIME" type="TIMESTAMP"/>
+            <column name="END_TIME" type="TIMESTAMP"/>
+            <column name="STATUS" type="VARCHAR(10)"/>
+            <column name="COMMIT_COUNT" type="BIGINT"/>
+            <column name="READ_COUNT" type="BIGINT"/>
+            <column name="WRITE_COUNT" type="BIGINT"/>
+            <column name="READ_SKIP_COUNT" type="BIGINT"/>
+            <column name="WRITE_SKIP_COUNT" type="BIGINT"/>
+            <column name="PROCESS_SKIP_COUNT" type="BIGINT"/>
+            <column name="FILTER_COUNT" type="BIGINT"/>
+            <column name="READ_ONLY_COUNT" type="BIGINT"/>
+            <column name="TASK_EXECUTOR_ID" type="VARCHAR(2500)"/>
+            <column name="LAST_UPDATED" type="TIMESTAMP"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="JOB_EXECUTION_ID" baseTableName="BATCH_STEP_EXECUTION"
+                                 constraintName="FK_BATCH_STEP_EXECUTION_JOB" referencedColumnNames="JOB_EXECUTION_ID"
+                                 referencedTableName="BATCH_JOB_EXECUTION"/>
+
+        <createTable tableName="BATCH_JOB_EXECUTION_PARAMS">
+            <column name="JOB_EXECUTION_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE_CD" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="KEY_NAME" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STRING_VAL" type="VARCHAR(2500)"/>
+            <column name="DATE_VAL" type="TIMESTAMP"/>
+            <column name="LONG_VAL" type="BIGINT"/>
+            <column name="DOUBLE_VAL" type="DOUBLE PRECISION"/>
+            <column name="IDENTIFYING" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="BATCH_JOB_EXECUTION_PARAMS"
+                       columnNames="JOB_EXECUTION_ID,TYPE_CD,KEY_NAME"
+                       constraintName="PK_BATCH_JOB_EXECUTION_PARAMS"/>
+
+        <addForeignKeyConstraint baseColumnNames="JOB_EXECUTION_ID" baseTableName="BATCH_JOB_EXECUTION_PARAMS"
+                                 constraintName="FK_BATCH_JOB_EXECUTION_PARAMS" referencedColumnNames="JOB_EXECUTION_ID"
+                                 referencedTableName="BATCH_JOB_EXECUTION"/>
+
+        <rollback>
+            <dropTable tableName="BATCH_JOB_EXECUTION_PARAMS"/>
+            <dropTable tableName="BATCH_STEP_EXECUTION"/>
+            <dropTable tableName="BATCH_JOB_EXECUTION"/>
+            <dropTable tableName="BATCH_JOB_INSTANCE"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
